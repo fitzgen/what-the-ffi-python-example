@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
 
-from ctypes import cdll
+from ctypes import byref, cdll, c_size_t
 
 lib = cdll.LoadLibrary("target/debug/libpython_example.dylib")
 
-answer = lib.life_universe_everything()
+left = b"wutang"
+right = b"mutate"
 
-print("The answer to life, the universe, and everything is {}".format(answer))
+distance = c_size_t(0)
+ok = lib.levenshtein_distance(left,
+                              len(left),
+                              right,
+                              len(right),
+                              byref(distance))
+
+if ok != 0:
+    print("Uh oh, something went wrong")
+else:
+    print("The levenshtein distance between {} and {} is {}".format(
+        left, right, distance))
