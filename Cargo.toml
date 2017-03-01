@@ -1,0 +1,12 @@
+[package]
+authors = ["Nick Fitzgerald <fitzgen@gmail.com>"]
+name = "python_example"
+version = "0.1.0"
+
+[dependencies]
+libc = "0.2.20"
+strsim = "0.6.0"
+
+[lib]
+crate-type = ["dylib"]
+name = "python_example"
